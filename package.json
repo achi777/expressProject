@@ -1,0 +1,36 @@
+{
+  "name": "expressproject",
+  "version": "1.0.0",
+  "description": "express project",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ./dist/main.js",
+    "dev": "nodemon",
+    "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
+    "lint": "eslint ./src/**",
+    "lint:fix": "eslint ./src/** --fix",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Archil Odishelidze",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.1.13",
+    "tslog": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.4.4"
+  }
+}
