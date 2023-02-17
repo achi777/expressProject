@@ -1,11 +1,13 @@
 import express, { Express } from 'express';
 import { Server } from 'http';
-import { ExeptionFilter } from './errors/exeption.filter';
 import { ILogger } from './logger/logger.interface';
-import { UserController } from './users/users.controller';
 import { inject, injectable } from 'inversify';
 import { TYPES } from './types';
+import { json } from 'body-parser';
 import 'reflect-metadata';
+import { IConfigService } from './config/config.service.interface';
+import { IExeptionFilter } from './errors/exeption.filter.interface';
+import { UserController } from './users/users.controller';
 
 @injectable()
 export class App {
@@ -16,10 +18,15 @@ export class App {
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.UserController) private userController: UserController,
-		@inject(TYPES.ExeptionFilter) private exeptionFilter: ExeptionFilter,
+		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
+		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
 		this.port = 8000;
+	}
+
+	useMiddleware(): void {
+		this.app.use(json());
 	}
 
 	useRoutes(): void {
@@ -31,6 +38,7 @@ export class App {
 	}
 
 	public async init(): Promise<void> {
+		this.useMiddleware();
 		this.useRoutes();
 		this.useExeptionFilters();
 		this.server = this.app.listen(this.port);
