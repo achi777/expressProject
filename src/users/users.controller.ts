@@ -39,7 +39,7 @@ export class UserController extends BaseController implements IUserController {
 			return next(new HTTPError(422, 'User this email is exisr'));
 		}
 		this.ok(res, result);
-		console.log({ email: result.email, name: result.name });
+		console.log({ email: result.email, name: result.name, id: result.id });
 	}
 	login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
 		console.log('mamukia');
