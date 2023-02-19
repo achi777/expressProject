@@ -8,6 +8,7 @@ import { IUsersRepository } from './users.repository.interface';
 @injectable()
 export class UsersRepository implements IUsersRepository {
 	constructor(@inject(TYPES.PrismaService) private prismaService: PrismaService) {}
+	login: (user: User) => Promise<UserModel>;
 
 	async find(email: string): Promise<UserModel | null> {
 		return this.prismaService.client.userModel.findFirst({
