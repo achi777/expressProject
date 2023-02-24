@@ -1,18 +1,33 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model UserModel {
   id       Int    @id @default(autoincrement())
-  email    String
-  password String
-  name     String
+  email    String @db.VarChar(255)
+  password String @db.VarChar(255)
+  name     String @db.VarChar(255)
 }
+
+// model UserModel {
+//   id       Int    @id @default(autoincrement())
+//   email    String
+//   password String
+//   name     String
+// }
